@@ -11,8 +11,7 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
-
-   const users = await User.find({ role: 'admin' });
+   const users = await User.find({ role: req.query.role });
 
    // SEND RESPONSE
    res.status(200).json({
