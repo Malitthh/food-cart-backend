@@ -1,7 +1,6 @@
 {
   "name": "foodcart",
   "version": "1.2.0",
-  "bin": "bin/createNodejsApp.js",
   "main": "src/server.js",
   "license": "MIT",
   "engines": {
