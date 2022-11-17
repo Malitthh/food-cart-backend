@@ -49,13 +49,20 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
-
+   console.log(req.body.photos.length)
+   let filteredBody = '';
+   if(req.body.photos.length === 0) {
+       filteredBody = filterObj(req.body, 'photos');
+   } else {
+       filteredBody = req.body;
+   }
    // 1) Filtered out unwanted fields names that are not allowed to be updated
-  // const filteredBody = filterObj(req.body, 'vehicleNo');
+ 
 
    // 2) Update vehicle document
    const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
+      filteredBody,
       {
          new: true,
          runValidators: true,

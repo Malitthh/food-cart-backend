@@ -51,11 +51,10 @@ exports.createOrder = catchAsync(async (req, res, next) => {
 exports.updateOrder = catchAsync(async (req, res, next) => {
 
    // 1) Filtered out unwanted fields names that are not allowed to be updated
-  // const filteredBody = filterObj(req.body, 'vehicleNo');
-
-   // 2) Update vehicle document
+   const filteredBody = filterObj(req.body, 'orderItems');
    const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
+      filteredBody,
       {
          new: true,
          runValidators: true,

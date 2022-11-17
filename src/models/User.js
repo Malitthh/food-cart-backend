@@ -52,11 +52,25 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  address: {
+    type: String,
+    required: [false, 'Please tell us address!'],
+    unique: false,
+    trim: false
+  },
+  mobileNo: {
+    type: String,
+    required: [false, 'Please tell us Mobile No!'],
+    unique: true,
+    trim: false
+  },
+  nic: {
+    type: String,
+    required: [false, 'Please tell us NIC!'],
+    unique: true,
+    trim: false
+  },
 });
-
-// userSchema.pre(/^find/, function (next) {
-//   next();
-// });
 
 // Encrpt the password ad Presave it
 userSchema.pre('save', async function (next) {
