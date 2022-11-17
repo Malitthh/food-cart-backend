@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route("/").get(userController.getAllUsers);
 
-router.use(protect); //  protect all router which are comming after this middleware
+router.use(protect); //  protect all router which are coming after this middleware
 
 router.patch("/updatePassword", authController.updatePassword);
 

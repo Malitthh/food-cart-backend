@@ -34,42 +34,23 @@ const creatsendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+  console.log(req.body, "test")
   let user = await User.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
+    mobileNo: ""
   });
 
   // Generate Account Activation Link
   const activationToken = user.createAccountActivationLink();
+  user.activated = true;
+  user.activationLink = undefined;
+ // user.save({ validateBeforeSave: false });
+  await user.save({ validateBeforeSave: false });
 
-  user.save({ validateBeforeSave: false });
-
-  // 4 Send it to Users Email
-  // const activationURL = `http://localhost:5000/api/v1/users/confirmMail/${activationToken}`;
-  let activationURL;
-  if (process.env.NODE_ENV === 'development')
-    activationURL = `${req.protocol}://${req.get('host')}/api/v1/confirmMail/${activationToken}`;
-  else activationURL = `${req.protocol}://${req.get('host')}/confirmMail/${activationToken}`;
-
-  const message = `GO to this link to activate your Smurf Account : ${activationURL} .`;
-
-  sendMail({
-    email: user.email,
-    message,
-    subject: 'Your Account Activation Link for Smurf App !',
-    user,
-    template: 'signupEmail.ejs',
-    url: activationURL,
-  });
-  res.status(201).json({
-    status: 'success',
-    data: {
-      user,
-    },
-  });
-  // creatsendToken(newUser, 201, res);
+  creatsendToken(user, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -78,7 +59,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   if (!email || !password) {
     //  check email and password exist
-    return next(new AppError(' please proveide email and password ', 400));
+    return next(new AppError(' please provide email and password ', 400));
   }
 
   const user = await User.findOne({ email }).select('+password'); // select expiclity password
@@ -88,7 +69,7 @@ exports.login = catchAsync(async (req, res, next) => {
     !user || // check user exist and password correct
     !(await user.correctPassword(password, user.password))
   ) {
-    // candinate password,correctpassword
+    // candidate password,correct password
     return next(new AppError('incorrect email or password', 401));
   }
 

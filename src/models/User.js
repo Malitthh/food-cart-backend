@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
   activated: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   address: {
     type: String,
@@ -61,13 +61,11 @@ const userSchema = new mongoose.Schema({
   mobileNo: {
     type: String,
     required: [false, 'Please tell us Mobile No!'],
-    unique: true,
-    trim: false
   },
   nic: {
     type: String,
     required: [false, 'Please tell us NIC!'],
-    unique: true,
+    unique: false,
     trim: false
   },
 });
