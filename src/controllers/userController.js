@@ -39,6 +39,24 @@ exports.createUser = catchAsync(async (req, res, next) => {
     };
   }
 
+  if (req.body.role === "employee") {
+    userObj = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm,
+      role: req.body.role,
+      address: req.body.address,
+      mobileNo: req.body.mobileNo,
+      nic: req.body.nic,
+      dob: req.body.dob,
+      gender:req.body.gender,
+      joinDate: req.body.joinDate,
+      dept: req.body.dept,
+      salary: req.body.salary,
+    };
+  }
+
   const newUser = await User.create(userObj);
 
   if (!newUser)

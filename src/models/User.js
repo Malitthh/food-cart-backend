@@ -68,6 +68,22 @@ const userSchema = new mongoose.Schema({
     unique: false,
     trim: false
   },
+  dob: {
+    type: String,
+    required: [false, 'Please tell us Date of birth!'],
+  },
+  joinDate: {
+    type: String,
+    required: [false, 'Please tell us Joined Date!'],
+  },
+  salary: {
+    type: Number,
+    required: [false, 'Please tell us Salary!'],
+  },
+  dept: {
+    type: String,
+    required: [false, 'Please tell us Department!'],
+  },
 });
 
 // Encrpt the password ad Presave it
