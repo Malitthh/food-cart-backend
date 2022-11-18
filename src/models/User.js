@@ -92,6 +92,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [false, 'Please tell us Department!'],
   },
+  category: {
+    type: String,
+    required: [false, 'Please tell us Category!'],
+  },
 });
 
 // Encrpt the password ad Presave it

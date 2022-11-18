@@ -36,8 +36,8 @@ exports.createUser = catchAsync(async (req, res, next) => {
       address: req.body.address,
       mobileNo: req.body.mobileNo,
       nic: req.body.nic,
-      gender:req.body.gender,
-      province:req.body.province,
+      gender: req.body.gender,
+      province: req.body.province,
     };
   }
 
@@ -52,10 +52,25 @@ exports.createUser = catchAsync(async (req, res, next) => {
       mobileNo: req.body.mobileNo,
       nic: req.body.nic,
       dob: req.body.dob,
-      gender:req.body.gender,
+      gender: req.body.gender,
       joinDate: req.body.joinDate,
       dept: req.body.dept,
       salary: req.body.salary,
+    };
+  }
+
+  if (req.body.role === "supplier") {
+    userObj = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm,
+      role: req.body.role,
+      address: req.body.address,
+      mobileNo: req.body.mobileNo,
+      province: req.body.province,
+      category: req.body.category,
+      joinDate: req.body.joinDate,
     };
   }
 
@@ -86,16 +101,12 @@ exports.updateUser = catchAsync(async (req, res, next) => {
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filterObj(req.body, "name", "email", "mobileNo");
-console.log(filteredBody, "body", req.body)
+  console.log(filteredBody, "body", req.body);
   // 3) Update user document
-  const updatedUser = await User.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
   res.status(200).json({
     status: "success",
