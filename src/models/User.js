@@ -84,6 +84,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [false, 'Please tell us Department!'],
   },
+  gender: {
+    type: String,
+    required: [false, 'Please tell us Department!'],
+  },
 });
 
 // Encrpt the password ad Presave it
