@@ -36,6 +36,8 @@ exports.createUser = catchAsync(async (req, res, next) => {
       address: req.body.address,
       mobileNo: req.body.mobileNo,
       nic: req.body.nic,
+      gender:req.body.gender,
+      province:req.body.province,
     };
   }
 

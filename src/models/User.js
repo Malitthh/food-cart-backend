@@ -84,6 +84,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [false, 'Please tell us Department!'],
   },
+  province: {
+    type: String,
+    required: [false, 'Please tell us Province!'],
+  },
   gender: {
     type: String,
     required: [false, 'Please tell us Department!'],
