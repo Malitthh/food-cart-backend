@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['fruit_nuts', 'vegetables','berries','butter_eggs'],
+    enum: ['fruit_nuts', 'vegetables','berries','butter_eggs','rice'],
     default: 'fruit_nuts',
   },
   stock: {
