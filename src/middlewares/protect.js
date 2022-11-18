@@ -30,13 +30,6 @@ module.exports = catchAsync(async (req, res, next) => {
 
   let newUser;
 
-  // TODO
-  // if(currentUser.role ==='customer'){
-
-  // }
-
-  // grant access to protected route
-  // req.user must be either tasker , customer , admin or a customer care
   req.user = currentUser;
   next();
 });

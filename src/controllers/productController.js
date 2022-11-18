@@ -49,7 +49,6 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
-   console.log(req.body.photos.length)
    let filteredBody = '';
    if(req.body.photos.length === 0) {
        filteredBody = filterObj(req.body, 'photos');

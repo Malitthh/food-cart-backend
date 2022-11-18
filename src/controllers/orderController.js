@@ -52,9 +52,10 @@ exports.updateOrder = catchAsync(async (req, res, next) => {
 
    // 1) Filtered out unwanted fields names that are not allowed to be updated
    const filteredBody = filterObj(req.body, 'orderItems');
+
    const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
-      filteredBody,
+      req.body,
       {
          new: true,
          runValidators: true,
