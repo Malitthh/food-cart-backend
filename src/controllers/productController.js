@@ -29,6 +29,8 @@ console.log(req.params, "params")
    let products;
    if(req.params.id === 'ALL') {
       products = await Product.find();
+   } else if(req.params.id === 'SHOP') { 
+      products = await Product.find({isReviewed: 1});
    } else {
       products = await Product.find({supplierId: req.params.id});
    }
@@ -57,6 +59,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
       supplierId: req.body.supplierId,
       supplierName: req.body.supplierName,
       supplierEmail: req.body.supplierEmail,
+      isReviewed: req.body.isReviewed
    });
 
    if (!newProduct)

@@ -52,6 +52,10 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  isReviewed: {
+    type: Number,
+    default: 0
+  },
   photos: [{ uuid: String, url: String }],
 });
 
