@@ -24,6 +24,25 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
    });
 });
 
+exports.getProductsBySupplier = catchAsync(async (req, res, next) => {
+console.log(req.params, "params")
+   let products;
+   if(req.params.id === 'ALL') {
+      products = await Product.find();
+   } else {
+      products = await Product.find({supplierId: req.params.id});
+   }
+
+   // SEND RESPONSE
+   res.status(200).json({
+      status: 'success',
+      results: products.length,
+      data: {
+        products,
+      },
+   });
+});
+
 exports.createProduct = catchAsync(async (req, res, next) => {
    console.log(req.body, "req")
    const newProduct = await Product.create({
@@ -33,7 +52,11 @@ exports.createProduct = catchAsync(async (req, res, next) => {
       price: req.body.price,
       category: req.body.category,
       stock: req.body.stock,
-      photos: req.body.photos
+      lowStock: req.body.lowStock,
+      photos: req.body.photos,
+      supplierId: req.body.supplierId,
+      supplierName: req.body.supplierName,
+      supplierEmail: req.body.supplierEmail,
    });
 
    if (!newProduct)

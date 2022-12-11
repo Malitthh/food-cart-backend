@@ -36,6 +36,18 @@ const productSchema = new mongoose.Schema({
   stock: {
     type: Number
   },
+  lowStock: {
+    type: Number
+  },
+  supplierId: {
+    type: String
+  },
+  supplierName: {
+    type: String
+  },
+  supplierEmail: {
+    type: String
+  },
   sold: {
     type: Number,
     default: 0
