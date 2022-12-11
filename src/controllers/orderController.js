@@ -24,6 +24,24 @@ exports.getAllOrders = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getAllOrdersByCustomer = catchAsync(async (req, res, next) => {
+  console.log(req.params.id, "params")
+  let orders;
+  if(req.params.id === 'ALL') {
+    orders = await Order.find();
+  } else {
+    orders = await Order.find({customerId: req.params.id});
+  }
+  // SEND RESPONSE
+  res.status(200).json({
+    status: "success", 
+    results: orders.length,
+    data: {
+      orders,
+    },
+  });
+});
+
 exports.createOrder = catchAsync(async (req, res, next) => {
   const newOrder = await Order.create({
     customerName: req.body.customerName,

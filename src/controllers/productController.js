@@ -25,7 +25,6 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
 });
 
 exports.getProductsBySupplier = catchAsync(async (req, res, next) => {
-console.log(req.params, "params")
    let products;
    if(req.params.id === 'ALL') {
       products = await Product.find();
@@ -34,7 +33,6 @@ console.log(req.params, "params")
    } else {
       products = await Product.find({supplierId: req.params.id});
    }
-
    // SEND RESPONSE
    res.status(200).json({
       status: 'success',
